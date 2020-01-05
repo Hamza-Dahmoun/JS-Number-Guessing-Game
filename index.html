@@ -68,12 +68,14 @@
                     holder.color = "purple";
                 }
                 message(holder.message, holder.color);
-                game.guessInput.style.borderColor = holder.color;
             }
         }
         function message(message, color){
             game.message.innerHTML = message;
             game.message.style.color = color || "black";
+            game.guessInput.style.borderColor = color;
+            game.btn.style.backgroundColor = color || "black";
+            game.btn.style.color = "white";
         }
 
 
