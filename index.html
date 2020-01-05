@@ -31,6 +31,7 @@
         })
 
         function init(){
+            game.guesses = 0;
             game.randomNumber = randomNumber(game.min, game.max);
             let tempMessage = "Welcome to the game. Guess a number between " + game.min + " and " + game.max;
             message(tempMessage, "blue");
@@ -47,13 +48,14 @@
             return Math.floor(Math.random()*(max-min+1)+min)
         }
         function guessValue(){
+            game.guesses++;
             let tempGuess = game.guessInput.value;
             tempGuess = parseInt(tempGuess);
             if(isNaN(tempGuess)){
                 message("Please enter only digits", "red");
             }
             else if(tempGuess == game.randomNumber){
-                message("Correct! you guessed " + game.randomNumber, "green");
+                message("Correct! you guessed " + game.randomNumber + " in " + game.guesses + " guesses", "green");
             }
             else{
                 let holder = {message:"", color:""};
