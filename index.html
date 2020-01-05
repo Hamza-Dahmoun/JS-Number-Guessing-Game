@@ -24,6 +24,7 @@
             game.message = document.querySelector(".message");
             game.guessInput = document.querySelector("input");
             game.btn = document.querySelector("button");
+            game.btn.addEventListener("click", guessValue);
             console.log(game);
 
             init();
@@ -44,6 +45,19 @@
             //so we added (+min) to the above returned number to make it greater than 'min'
 
             return Math.floor(Math.random()*(max-min+1)+min)
+        }
+        function guessValue(){
+            let tempGuess = game.guessInput.value;
+            tempGuess = parseInt(tempGuess);
+            if(isNaN(tempGuess)){
+                message("Please enter only digits", "red");
+            }
+            else if(tempGuess == game.randomNumber){
+                message("Correct! you guessed " + game.randomNumber, "green");
+            }
+            else if(tempGuess != game.randomNumber){
+                message("Not correct! it was " + game.randomNumber, "red");
+            }
         }
         function message(message, color){
             game.message.innerHTML = message;
