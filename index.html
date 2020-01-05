@@ -2,7 +2,11 @@
 <html>
 
 <head>
-
+    <style>
+        .replay {
+            padding: 4px;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,7 +18,7 @@
         <button>Guess</button>
     </div>
     <script>
-        let game = {"min":1, "max":10};
+        let game = { "min": 1, "max": 10 };
 
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -30,13 +34,13 @@
             init();
         })
 
-        function init(){
+        function init() {
             game.guesses = 0;
             game.randomNumber = randomNumber(game.min, game.max);
             let tempMessage = "Welcome to the game. Guess a number between " + game.min + " and " + game.max;
             message(tempMessage, "blue");
         }
-        function randomNumber(min, max){            
+        function randomNumber(min, max) {
             //min=3, max=10
             //max-min: 10-3 = 7
             //max-min+1: 10-3+1 = 8
@@ -45,42 +49,52 @@
             //Math.random()*(7+1+3): returns  1 ~ 10
             //so we added (+min) to the above returned number to make it greater than 'min'
 
-            return Math.floor(Math.random()*(max-min+1)+min)
+            return Math.floor(Math.random() * (max - min + 1) + min)
         }
-        function guessValue(){
-            game.guesses++;
-            let tempGuess = game.guessInput.value;
-            tempGuess = parseInt(tempGuess);
-            if(isNaN(tempGuess)){
-                message("Please enter only digits", "red");
+        function guessValue() {
+            if (game.btn.classList.contains("replay")) {
+                //so it is a new game
+                init();
+                game.guessInput.style.display = "block";
+                game.btn.innerHTML = "Guess";
+                game.btn.classList.remove("replay");
             }
-            else if(tempGuess == game.randomNumber){
-                message("Correct! you guessed " + game.randomNumber + " in " + game.guesses + " guesses", "green");
-                gameOver();            
-            }
-            else{
-                let holder = {message:"", color:""};
-                if(tempGuess > game.randomNumber){
-                    holder.message = "Was Lower";
-                    holder.color = "blue";
+            else {
+                game.guesses++;
+                let tempGuess = game.guessInput.value;
+                tempGuess = parseInt(tempGuess);
+                if (isNaN(tempGuess)) {
+                    message("Please enter only digits", "red");
                 }
-                else{
-                    holder.message = "Was Higher";
-                    holder.color = "purple";
+                else if (tempGuess == game.randomNumber) {
+                    message("Correct! you guessed " + game.randomNumber + " in " + game.guesses + " guesses", "green");
+                    gameOver();
                 }
-                message(holder.message, holder.color);
+                else {
+                    let holder = { message: "", color: "" };
+                    if (tempGuess > game.randomNumber) {
+                        holder.message = "Was Lower";
+                        holder.color = "blue";
+                    }
+                    else {
+                        holder.message = "Was Higher";
+                        holder.color = "purple";
+                    }
+                    message(holder.message, holder.color);
+                }
             }
         }
-        function message(message, color){
+        function message(message, color) {
             game.message.innerHTML = message;
             game.message.style.color = color || "black";
             game.guessInput.style.borderColor = color;
             game.btn.style.backgroundColor = color || "black";
             game.btn.style.color = "white";
         }
-        function gameOver(){
+        function gameOver() {
             game.btn.innerHTML = "Restart Game";
-            game.guessInput.style.display = "none";            
+            game.guessInput.style.display = "none";
+            game.btn.classList.add("replay");
         }
 
 
