@@ -31,6 +31,12 @@
 
         function init(){
             let tempMessage = "Welcome to the game. Guess a number between " + game.min + " and " + game.max;
+            message(tempMessage, "blue");
+        }
+
+        function message(message, color){
+            game.message.innerHTML = message;
+            game.message.style.color = color || "black";
         }
 
 
