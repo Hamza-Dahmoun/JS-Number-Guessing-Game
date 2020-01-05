@@ -30,10 +30,21 @@
         })
 
         function init(){
+            game.randomNumber = randomNumber(game.min, game.max);
             let tempMessage = "Welcome to the game. Guess a number between " + game.min + " and " + game.max;
             message(tempMessage, "blue");
         }
+        function randomNumber(min, max){            
+            //min=3, max=10
+            //max-min: 10-3 = 7
+            //max-min+1: 10-3+1 = 8
+            //Math.random(): returns 0.00000....1 ~ 0.999999999.....
+            //Math.random()*7: returns  1 ~ 6
+            //Math.random()*(7+1+3): returns  1 ~ 10
+            //so we added (+min) to the above returned number to make it greater than 'min'
 
+            return Math.floor(Math.random()*(max-min+1)+min)
+        }
         function message(message, color){
             game.message.innerHTML = message;
             game.message.style.color = color || "black";
