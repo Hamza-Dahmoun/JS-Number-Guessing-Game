@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
 
-    </head>
-    <body>
-        <div class="output">
-            <div class="message">
+<head>
 
-            </div>
-            <input type="number" />
-            <button>Guess</button>
+</head>
+
+<body>
+    <div class="output">
+        <div class="message">
+
         </div>
-    </body>
+        <input type="number" />
+        <button>Guess</button>
+    </div>
+    <script>
+        let game = {};
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            //this function is executed only when the DOM content is fully loaded
+            console.log("DOM is Ready!");
+            game.output = document.querySelector(".output");
+            game.message = document.querySelector(".message");
+            game.guessInput = document.querySelector("input");
+            game.btn = document.querySelector("button");
+
+            console.log(game);
+        })
+
+
+    </script>
+</body>
+
 </html>
