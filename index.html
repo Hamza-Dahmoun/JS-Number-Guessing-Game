@@ -55,8 +55,18 @@
             else if(tempGuess == game.randomNumber){
                 message("Correct! you guessed " + game.randomNumber, "green");
             }
-            else if(tempGuess != game.randomNumber){
-                message("Not correct! it was " + game.randomNumber, "red");
+            else{
+                let holder = {message:"", color:""};
+                if(tempGuess > game.randomNumber){
+                    holder.message = "Was Lower";
+                    holder.color = "blue";
+                }
+                else{
+                    holder.message = "Was Higher";
+                    holder.color = "purple";
+                }
+                message(holder.message, holder.color);
+                game.guessInput.style.borderColor = holder.color;
             }
         }
         function message(message, color){
