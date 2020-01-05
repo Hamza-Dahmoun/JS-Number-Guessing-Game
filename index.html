@@ -14,7 +14,7 @@
         <button>Guess</button>
     </div>
     <script>
-        let game = {};
+        let game = {"min":1, "max":10};
 
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -24,9 +24,14 @@
             game.message = document.querySelector(".message");
             game.guessInput = document.querySelector("input");
             game.btn = document.querySelector("button");
-
             console.log(game);
+
+            init();
         })
+
+        function init(){
+            let tempMessage = "Welcome to the game. Guess a number between " + game.min + " and " + game.max;
+        }
 
 
     </script>
